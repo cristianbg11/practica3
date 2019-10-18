@@ -1,18 +1,19 @@
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.List;
+
 public class Sql {
     //Class.forName("org.h2.Driver");
     Sql2o sql2o = new Sql2o("jdbc:h2:~/practica3", "sa", "");
     public void insertUser (Usuario usuario) throws ClassNotFoundException {
         Class.forName("org.h2.Driver");
         String insertQuery =
-                "INSERT INTO USUARIO (id, username, password, administrador, autor, nombre) " +
-                        "VALUES (:id, :username, :password, :administrador, :autor, :nombre)";
+                "INSERT INTO USUARIO (username, password, administrador, autor, nombre) " +
+                        "VALUES (:username, :password, :administrador, :autor, :nombre)";
 
         try (Connection con = sql2o.beginTransaction()) {
             con.createQuery(insertQuery)
-                    .addParameter("id", 2)
                     .addParameter("username", usuario.getUsername())
                     .addParameter("password", usuario.getPassword())
                     .addParameter("administrador", usuario.isAdministrador())

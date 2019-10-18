@@ -14,16 +14,16 @@
             <input type="text" placeholder="Username" name="username"/>
             <input type="text" placeholder="Nombre" name="nombre"/>
             <input type="password" placeholder="Password" name="password"/>
-            <input type="hidden" name="administrador" value="FALSE">
-            <input type="hidden" name="autor" value="FALSE">
+            <input type="hidden" name="administrador" value="TRUE">
+            <input type="hidden" name="autor" value="TRUE">
             <button>Enviar</button>
         </form>
     </div>
     <div class="form-container sign-in-container">
-        <form action="#">
+        <form action="/sesion" method="POST">
             <h1>Sign in</h1>
-            <input type="text" placeholder="Username" />
-            <input type="password" placeholder="Password" />
+            <input type="text" placeholder="Username" name="user" />
+            <input type="password" placeholder="Password" name="pass" />
             <button>Sign In</button>
         </form>
     </div>

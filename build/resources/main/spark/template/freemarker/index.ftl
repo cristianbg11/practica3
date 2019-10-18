@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/Article-List.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/smoothproducts.css">
+    <link rel="stylesheet" href="css/view.css">
 </head>
 <body>
 
@@ -20,9 +21,12 @@
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item" role="presentation"><a class="nav-link active" href="/index">Home</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/articulo">Articulos</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/user">Usuarios</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/crear.html">Crear</a></li>
+                <#if usuario.administrador == true>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/articulo">Articulos</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/user">Usuarios</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/crear">Crear</a></li>
+                </#if>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/">Salir</a></li>
             </ul>
         </div>
     </div>
@@ -53,7 +57,7 @@
         <div class="row articles">
             <div class="col-sm-6 col-md-4 item"><a href="#"></a>
                 <h3 class="name">Article Title</h3>
-                <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a href="#" class="action"><i class="fa fa-arrow-circle-right"></i></a></div>
+                <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a href="#" class="action" id="viewopen"><i class="fa fa-arrow-circle-right"></i></a></div>
             <div
                     class="col-sm-6 col-md-4 item"><a href="#"></a>
                 <h3 class="name">Article Title</h3>
@@ -65,10 +69,19 @@
         </div>
     </div>
 </div>
+<div class="pop">
+    <span>X</span>
+    <h1>jQuery Pop Up</h1>
+    <p>This is a random pop up, hopefully its not annoying.</p>
+    <div class="form-group"><label>Comentario</label><textarea class="form-control"></textarea></div>
+    <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="margin: 0 auto;width: 82px;height: 38px;">Enviar</button></div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
 <script src="assets/js/smoothproducts.min.js"></script>
 <script src="assets/js/theme.js"></script>
+<script src="js/view.js"></script>
 </body>
 </html>

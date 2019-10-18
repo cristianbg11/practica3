@@ -1,9 +1,34 @@
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
+
+import java.util.List;
+
 public class Usuario {
+    int id;
     String username;
-    String nombre;
     String password;
     boolean administrador;
     boolean autor;
+    String nombre;
+
+    Sql2o sql2o = new Sql2o("jdbc:h2:~/practica3", "sa", "");
+    public List<Usuario> getAllUsers(){
+        String sql =
+                "SELECT id, username, password, administrador, autor, nombre " +
+                        "FROM usuario";
+
+        try(Connection con = sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Usuario.class);
+        }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;

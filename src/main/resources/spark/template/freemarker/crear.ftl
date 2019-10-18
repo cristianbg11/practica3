@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Features - Brand</title>
+    <title>Contact Us - Brand</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,45 +28,25 @@
         </div>
     </div>
 </nav>
-<main class="page">
-    <section class="clean-block features">
-        <div class="container" style="margin-bottom: 0px;margin-top: 0px;">
-            <h1 class="text-center" style="margin-bottom: 8px;margin-top: 20px;">Articulos</h1>
-        </div>
-        <div class="table-responsive d-lg-flex align-items-lg-center" style="margin: 0px;">
-            <table class="table">
-                <thead class="text-justify">
-                <tr class="table-active text-monospace text-left">
-                    <th>#</th>
-                    <th>Titulo</th>
-                    <th>Cuerpo</th>
-                    <th>Autor</th>
-                    <th>Fecha</th>
-                    <th>Comentario</th>
-                    <th>Etiqueta</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>0</td>
-                    <td class="d-lg-flex">TV</td>
-                    <td>Text</td>
-                    <td>Cristian</td>
-                    <td>2019/15/2019</td>
-                    <td>Text</td>
-                    <td>Text</td>
-                    <td>
-                        <div class="dropdown"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button">Opcion&nbsp;</button>
-                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Ver</a><a class="dropdown-item" role="presentation" href="/edita">Editar</a><a class="dropdown-item" role="presentation" href="#">Eliminar</a></div>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+<main class="page contact-us-page">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-info">Crear articulo</h2>
+            </div>
+            <form>
+                <div class="form-group"><label>Titulo</label><input class="form-control" type="text"></div>
+                <div class="form-group"><label>Cuerpo</label><textarea class="form-control"></textarea></div>
+                <div class="form-group"><label>Autor</label><input class="form-control" readonly type="text"></div>
+                <div
+                        class="form-group"><label>Fecha</label><input class="form-control" type="date"></div>
+                <div class="form-group"><label>Etiqueta</label><input class="form-control" type="email"></div>
+                <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Enviar</button></div>
+            </form>
         </div>
     </section>
 </main>
+<footer class="page-footer dark" style="margin-top: 0px;"></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>

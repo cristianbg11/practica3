@@ -22,7 +22,8 @@
                 <li class="nav-item" role="presentation"><a class="nav-link active" href="/index">Home</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="/articulo">Articulos</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="/user">Usuarios</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/crear.html">Crear</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/crear">Crear</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/">Salir</a></li>
             </ul>
         </div>
     </div>
@@ -32,48 +33,23 @@
         <div class="container">
             <div class="block-heading">
                 <h2 class="text-info">Usuarios</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                <p>Listado de usuarios registrados en la base de datos. Solo administradores permitidos a esta pagina.</p>
             </div>
             <div class="row justify-content-center">
-                <div class="col-md-5 col-lg-4">
-                    <div class="clean-pricing-item">
-                        <div class="heading">
-                            <h3>BASIC</h3>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <div class="features">
-                            <h4><span class="feature">Nombre:&nbsp;</span><span>No</span></h4>
-                            <h4><span class="feature">Administrador:&nbsp;</span><span>No</span></h4>
-                            <h4><span class="feature">Autor:&nbsp;</span><span>No</span></h4>
-                        </div>
-                        <div class="price"></div><button class="btn btn-outline-primary btn-block" type="button">Editar</button><button class="btn btn-outline-primary btn-block" type="button">Eliminar</button></div>
-                </div>
-                <div class="col-md-5 col-lg-4">
-                    <div class="clean-pricing-item">
-                        <div class="heading">
-                            <h3>PREMIUM</h3>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <div class="features">
-                            <h4><span class="feature">Nombre:&nbsp;</span><span>Yes</span></h4>
-                            <h4><span class="feature">Administrador:&nbsp;</span><span>Si</span></h4>
-                            <h4><span class="feature">Autor:&nbsp;</span><span>No</span></h4>
-                        </div>
-                        <div class="price"></div><button class="btn btn-outline-primary btn-block" type="button">Editar</button><button class="btn btn-outline-primary btn-block" type="button">Eliminar</button></div>
-                </div>
-                <div class="col-md-5 col-lg-4">
-                    <div class="clean-pricing-item">
-                        <div class="heading">
-                            <h3>PREMIUM</h3>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <div class="features">
-                            <h4><span class="feature">Nombre:&nbsp;</span><span>Yes</span></h4>
-                            <h4><span class="feature">Administrador:&nbsp;</span><span>Si</span></h4>
-                            <h4><span class="feature">Autor:&nbsp;</span><span>Si</span></h4>
-                        </div>
-                        <div class="price"></div><button class="btn btn-outline-primary btn-block" type="button">Editar</button><button class="btn btn-outline-primary btn-block" type="button">Eliminar</button></div>
-                </div>
+                <#list listado as usuario>
+                    <div class="col-md-5 col-lg-4">
+                        <div class="clean-pricing-item">
+                            <div class="heading">
+                                <h3>${usuario.username}</h3>
+                            </div>
+                            <div class="features">
+                                <h4><span class="feature">Nombre:&nbsp;</span><span>${usuario.nombre}</span></h4>
+                                <h4><span class="feature">Administrador:&nbsp;</span><span>${usuario.administrador?then('Si', 'No')}</span></h4>
+                                <h4><span class="feature">Autor:&nbsp;</span><span>${usuario.autor?then('Si', 'No')}</span></h4>
+                            </div>
+                            <div class="price"></div><button class="btn btn-outline-primary btn-block" type="button">Editar</button><button class="btn btn-outline-primary btn-block" type="button">Eliminar</button></div>
+                    </div>
+                </#list>
             </div>
         </div>
     </section>

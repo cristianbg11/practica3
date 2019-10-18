@@ -22,7 +22,8 @@
                 <li class="nav-item" role="presentation"><a class="nav-link active" href="/index">Home</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="/articulo">Articulos</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="/user">Usuarios</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/crear.html">Crear</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/crear">Crear</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/">Salir</a></li>
             </ul>
         </div>
     </div>
@@ -57,7 +58,7 @@
                     <td>Text</td>
                     <td>
                         <div class="dropdown"><button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button">Opcion&nbsp;</button>
-                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Ver</a><a class="dropdown-item" role="presentation" href="#">Editar</a><a class="dropdown-item" role="presentation" href="#">Eliminar</a></div>
+                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Ver</a><a class="dropdown-item" role="presentation" href="/edita">Editar</a><a class="dropdown-item" role="presentation" href="#">Eliminar</a></div>
                         </div>
                     </td>
                 </tr>
