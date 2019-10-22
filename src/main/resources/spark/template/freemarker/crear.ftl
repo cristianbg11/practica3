@@ -19,11 +19,18 @@
         <div class="collapse navbar-collapse"
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item" role="presentation"><a class="nav-link active" href="/index">Home</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/articulo">Articulos</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/user">Usuarios</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/crear">Crear</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/">Salir</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link active" href="/index">Inicio</a></li>
+                <#if usuario?has_content>
+                    <#if usuario.administrador == true>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/articulo">Articulos</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/user">Usuarios</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/crear">Crear</a></li>
+                    <#elseif usuario.autor == true>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/articulo">Articulos</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/crear">Crear</a></li>
+                    </#if>
+                </#if>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/salir">Salir</a></li>
             </ul>
         </div>
     </div>
@@ -34,13 +41,13 @@
             <div class="block-heading">
                 <h2 class="text-info">Crear articulo</h2>
             </div>
-            <form>
-                <div class="form-group"><label>Titulo</label><input class="form-control" type="text"></div>
-                <div class="form-group"><label>Cuerpo</label><textarea class="form-control"></textarea></div>
-                <div class="form-group"><label>Autor</label><input class="form-control" readonly type="text"></div>
+            <form action="/crear-articulo" method="POST">
+                <div class="form-group"><label>Titulo</label><input class="form-control" name="titulo" type="text"></div>
+                <div class="form-group"><label>Cuerpo</label><textarea class="form-control" name="cuerpo"></textarea></div>
+                <div class="form-group"><label>Autor</label><input class="form-control" readonly type="text" name="autor" value="${usuario.nombre}"></div>
                 <div
-                        class="form-group"><label>Fecha</label><input class="form-control" type="date"></div>
-                <div class="form-group"><label>Etiqueta</label><input class="form-control" type="email"></div>
+                        class="form-group"><label>Fecha</label><input class="form-control" type="date" name="fecha"></div>
+                <div class="form-group"><label>Etiqueta</label><input class="form-control" type="text" name="etiqueta"></div>
                 <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Enviar</button></div>
             </form>
         </div>

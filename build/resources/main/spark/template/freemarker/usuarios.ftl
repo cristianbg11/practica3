@@ -19,11 +19,18 @@
         <div class="collapse navbar-collapse"
              id="navcol-1">
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item" role="presentation"><a class="nav-link active" href="/index">Home</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/articulo">Articulos</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/user">Usuarios</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/crear">Crear</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/">Salir</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link active" href="/index">Inicio</a></li>
+                <#if usuario?has_content>
+                    <#if usuario.administrador == true>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/articulo">Articulos</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/user">Usuarios</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/crear">Crear</a></li>
+                    <#elseif usuario.autor == true>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/articulo">Articulos</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="/crear">Crear</a></li>
+                    </#if>
+                </#if>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/salir">Salir</a></li>
             </ul>
         </div>
     </div>

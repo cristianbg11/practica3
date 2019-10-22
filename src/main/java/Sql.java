@@ -26,4 +26,42 @@ public class Sql {
         }
 
     }
+
+    public void insertArticulo (Articulo articulo) throws ClassNotFoundException {
+        Class.forName("org.h2.Driver");
+        String insertQuery =
+                "INSERT INTO ARTICULO (titulo, cuerpo, usuario_id, fecha) " +
+                        "VALUES (:titulo, :cuerpo, :usuario_id, :fecha)";
+
+        try (Connection con = sql2o.beginTransaction()) {
+            con.createQuery(insertQuery)
+                    .addParameter("titulo", articulo.getTitulo())
+                    .addParameter("cuerpo", articulo.getCuerpo())
+                    .addParameter("usuario_id", articulo.getAutor().id)
+                    .addParameter("fecha", articulo.getFecha())
+                    .executeUpdate();
+            // Remember to call commit() when a transaction is opened,
+            // default is to roll back.
+            con.commit();
+        }
+
+    }
+
+    public void insertEtiqueta (Etiqueta etiqueta) throws ClassNotFoundException {
+        Class.forName("org.h2.Driver");
+        String insertQuery =
+                "INSERT INTO ETIQUETA (etiqueta, articulo_id) " +
+                        "VALUES (:etiqueta, :articulo_id)";
+
+        try (Connection con = sql2o.beginTransaction()) {
+            con.createQuery(insertQuery)
+                    .addParameter("etiqueta", etiqueta.getEtiqueta())
+                    .addParameter("articulo_id", etiqueta.getArticulo().id)
+                    .executeUpdate();
+            // Remember to call commit() when a transaction is opened,
+            // default is to roll back.
+            con.commit();
+        }
+
+    }
 }

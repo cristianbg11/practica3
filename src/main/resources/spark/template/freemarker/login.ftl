@@ -24,7 +24,7 @@
             <h1>Sign in</h1>
             <input type="text" placeholder="Username" name="user" />
             <input type="password" placeholder="Password" name="pass" />
-            <button>Sign In</button>
+            <button>Iniciar</button>
         </form>
     </div>
     <div class="overlay-container">
@@ -35,9 +35,9 @@
                 <button class="ghost" id="signIn">Sign In</button>
             </div>
             <div class="overlay-panel overlay-right">
-                <h1>Hello, Usuario!</h1>
+                <h1>Hola, Usuario!</h1>
                 <p>Introdusca sus datos personales e inicie este software</p>
-                <button class="ghost" id="signUp">Sign Up</button>
+                <button class="ghost" id="signUp">Registrarse</button>
             </div>
         </div>
     </div>

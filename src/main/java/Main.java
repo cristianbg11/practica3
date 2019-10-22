@@ -4,6 +4,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.template.freemarker.FreeMarkerEngine;
+import spark.Session;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -14,6 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.*;
 
 import static spark.Spark.*;
@@ -39,18 +42,35 @@ public class Main {
             return "Usuario Creado";
         });
 
-        get("/", (request, response)-> {
-            List<Usuario> users = user.getAllUsers();
-            Map<String, Object> attributes = new HashMap<>();
-            attributes.put("usuario",users);
-            return new ModelAndView(attributes, "login.ftl");
+        post("/crear-articulo", (request, response)-> {
+            //int id = Integer.parseInt(request.queryParams("iduser"));
+            Session session=request.session(true);
+            Usuario usuario = (Usuario)(session.attribute("usuario"));
+            Articulo articulo = new Articulo();
+            Etiqueta etiqueta = new Etiqueta();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            articulo.titulo = request.queryParams("titulo");
+            articulo.cuerpo = request.queryParams("cuerpo");
+            articulo.autor = usuario;
+            articulo.fecha = format.parse(request.queryParams("fecha"));
+            sql.insertArticulo(articulo);
+            List <Articulo> articulos = articulo.getAllArticles();
+            etiqueta.etiqueta = request.queryParams("etiqueta");
+            etiqueta.articulo = articulos.get(articulos.size()-1);
+            sql.insertEtiqueta(etiqueta);
+            response.redirect("/index");
+            return "Articulo Creado";
+        });
 
-        } , new FreeMarkerEngine());
+        get("/", (request, response)-> {
+            //response.redirect("/login.html");
+            return renderContent("publico/login.html");
+        });
 
         get("/edita", (request, response)-> {
             List<Usuario> users = user.getAllUsers();
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("listado",users);
+            attributes.put("usuario",users);
             return new ModelAndView(attributes, "articuloedit.ftl");
 
         } , new FreeMarkerEngine());
@@ -59,29 +79,40 @@ public class Main {
             List<Usuario> users = user.getAllUsers();
             String username = request.queryParams("user");
             String password = request.queryParams("pass");
-            Map<String, Object> attributes = new HashMap<>();
+            Session session=request.session(true);
+
             for(Usuario usuario : users){
                 if (usuario.username.equals(username) && usuario.password.equals(password)){
-                    attributes.put("usuario",users.get(usuario.id));
-                    return new ModelAndView(attributes, "index.ftl");
-                    //response.redirect("/index");
+                    session.attribute("usuario", usuario);
+                    response.redirect("/index");
                 }
             }
-            return new ModelAndView(attributes, "login.ftl");
-        }, new FreeMarkerEngine());
+            response.redirect("/");
+            return 0;
+        });
+
 
         get("/index", (request, response)-> {
-            List<Usuario> users = user.getAllUsers();
+            Session session=request.session(true);
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("listado",users);
+            Usuario usuario = (Usuario)(session.attribute("usuario"));
+            attributes.put("usuario",usuario);
             return new ModelAndView(attributes, "index.ftl");
 
         } , new FreeMarkerEngine());
 
+        get("/salir", (request, response)->{
+            //creando cookie en para un minuto
+            Session session=request.session(true);
+            session.invalidate();
+            response.redirect("/");
+            return "Sesion finalizada";
+        });
+
         get("/user", (request, response)-> {
             List<Usuario> users = user.getAllUsers();
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("listado",users);
+            attributes.put("usuario",users);
             return new ModelAndView(attributes, "usuarios.ftl");
 
         } , new FreeMarkerEngine());
@@ -89,15 +120,18 @@ public class Main {
         get("/articulo", (request, response)-> {
             List<Usuario> users = user.getAllUsers();
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("listado",users);
+            attributes.put("usuario",users);
             return new ModelAndView(attributes, "articulos.ftl");
 
         } , new FreeMarkerEngine());
 
         get("/crear", (request, response)-> {
-            List<Usuario> users = user.getAllUsers();
+
+            Session session=request.session(true);
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("listado",users);
+            Usuario usuario = (Usuario)(session.attribute("usuario"));
+            attributes.put("usuario",usuario);
+
             return new ModelAndView(attributes, "crear.ftl");
 
         } , new FreeMarkerEngine());
