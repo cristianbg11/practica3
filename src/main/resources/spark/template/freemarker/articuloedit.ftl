@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="assets/css/Article-List.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/smoothproducts.css">
+    <link rel="stylesheet" href="assets/css/Bootstrap-Tags-Input.css">
+
 </head>
 
 <body>
@@ -47,7 +49,7 @@
                 <div class="form-group"><label>Autor</label><input class="form-control" readonly type="text"></div>
                 <div
                         class="form-group"><label>Fecha</label><input class="form-control" type="date"></div>
-                <div class="form-group"><label>Etiqueta</label><input class="form-control" type="email"></div>
+                <div class="form-group"><label>Etiqueta</label><input type="text" placeholder="Agrega tags" class="form-control" data-role="tagsinput" data-class="label-info"/></div>
                 <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Enviar</button></div>
             </form>
         </div>
@@ -59,6 +61,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
 <script src="assets/js/smoothproducts.min.js"></script>
 <script src="assets/js/theme.js"></script>
+<script src="assets/js/Bootstrap-Tags-Input-1.js"></script>
+<script src="assets/js/Bootstrap-Tags-Input.js"></script>
 </body>
 
 </html>

@@ -6,7 +6,7 @@ import java.util.List;
 public class Etiqueta {
     long id;
     String etiqueta;
-    Articulo articulo;
+    int articulo_id;
 
     Sql2o sql2o = new Sql2o("jdbc:h2:~/practica3", "sa", "");
     public List<Etiqueta> getAllEtiquetas(){
@@ -35,11 +35,11 @@ public class Etiqueta {
         this.etiqueta = etiqueta;
     }
 
-    public Articulo getArticulo() {
-        return articulo;
+    public int getArticulo_id() {
+        return articulo_id;
     }
 
-    public void setArticulo(Articulo articulo) {
-        this.articulo = articulo;
+    public void setArticulo_id(int articulo_id) {
+        this.articulo_id = articulo_id;
     }
 }

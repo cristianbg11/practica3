@@ -47,20 +47,22 @@ public class Sql {
 
     }
 
-    public void insertEtiqueta (Etiqueta etiqueta) throws ClassNotFoundException {
+    public void insertEtiqueta (Etiqueta etiqueta, List tag, int cant) throws ClassNotFoundException {
         Class.forName("org.h2.Driver");
-        String insertQuery =
-                "INSERT INTO ETIQUETA (etiqueta, articulo_id) " +
-                        "VALUES (:etiqueta, :articulo_id)";
+        for(int i=0; i < cant; i++){
+            String insertQuery =
+                    "INSERT INTO ETIQUETA (etiqueta, articulo_id) " +
+                            "VALUES (:etiqueta, :articulo_id)";
 
-        try (Connection con = sql2o.beginTransaction()) {
-            con.createQuery(insertQuery)
-                    .addParameter("etiqueta", etiqueta.getEtiqueta())
-                    .addParameter("articulo_id", etiqueta.getArticulo().id)
-                    .executeUpdate();
-            // Remember to call commit() when a transaction is opened,
-            // default is to roll back.
-            con.commit();
+            try (Connection con = sql2o.beginTransaction()) {
+                con.createQuery(insertQuery)
+                        .addParameter("etiqueta", tag.get(i))
+                        .addParameter("articulo_id", etiqueta.getArticulo_id())
+                        .executeUpdate();
+                // Remember to call commit() when a transaction is opened,
+                // default is to roll back.
+                con.commit();
+            }
         }
 
     }

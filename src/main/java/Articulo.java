@@ -23,6 +23,17 @@ public class Articulo {
             return con.createQuery(sql).executeAndFetch(Articulo.class);
         }
     }
+
+    public Integer getLastArticle() {
+        String sql =
+                "SELECT top 1 id " +
+                        "FROM articulo order by id desc";
+
+        try(Connection con = sql2o.open()) {
+            return con.createQuery(sql).executeScalar(Integer.class);
+        }
+    }
+
     public long getId() {
         return id;
     }

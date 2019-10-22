@@ -4,13 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Contact Us - Brand</title>
+    <title>Articulo</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/Article-List.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/smoothproducts.css">
+    <link rel="stylesheet" href="assets/css/Bootstrap-Tags-Input.css">
 </head>
 
 <body>
@@ -45,9 +46,8 @@
                 <div class="form-group"><label>Titulo</label><input class="form-control" name="titulo" type="text"></div>
                 <div class="form-group"><label>Cuerpo</label><textarea class="form-control" name="cuerpo"></textarea></div>
                 <div class="form-group"><label>Autor</label><input class="form-control" readonly type="text" name="autor" value="${usuario.nombre}"></div>
-                <div
-                        class="form-group"><label>Fecha</label><input class="form-control" type="date" name="fecha"></div>
-                <div class="form-group"><label>Etiqueta</label><input class="form-control" type="text" name="etiqueta"></div>
+                <div class="form-group"><label>Fecha</label><input class="form-control" type="date" name="fecha"></div>
+                <div class="form-group"><label>Etiqueta</label><input type="text" placeholder="Agrega tags" class="form-control" data-role="tagsinput" data-class="label-info" name="etiqueta"/></div>
                 <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Enviar</button></div>
             </form>
         </div>
@@ -59,6 +59,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
 <script src="assets/js/smoothproducts.min.js"></script>
 <script src="assets/js/theme.js"></script>
+<script src="assets/js/Bootstrap-Tags-Input-1.js"></script>
+<script src="assets/js/Bootstrap-Tags-Input.js"></script>
 </body>
 
 </html>

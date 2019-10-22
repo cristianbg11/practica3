@@ -54,10 +54,14 @@ public class Main {
             articulo.autor = usuario;
             articulo.fecha = format.parse(request.queryParams("fecha"));
             sql.insertArticulo(articulo);
-            List <Articulo> articulos = articulo.getAllArticles();
-            etiqueta.etiqueta = request.queryParams("etiqueta");
-            etiqueta.articulo = articulos.get(articulos.size()-1);
-            sql.insertEtiqueta(etiqueta);
+            //List <Articulo> articulos = articulo.getAllArticles();
+            //etiqueta.etiqueta = request.queryParams("etiqueta");
+            String[] tags = request.queryParams("etiqueta").split(",");
+            List<String> tagList = Arrays.asList(tags);
+            //etiqueta.articulo.id = articulo.getLastArticle();
+            //etiqueta.articulo = articulos.get(articulos.size()-1);
+            etiqueta.articulo_id = articulo.getLastArticle();
+            sql.insertEtiqueta(etiqueta, tagList, tagList.size());
             response.redirect("/index");
             return "Articulo Creado";
         });
