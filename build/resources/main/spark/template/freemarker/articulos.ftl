@@ -45,7 +45,6 @@
             <table class="table">
                 <thead class="text-justify">
                 <tr class="table-active text-monospace text-left">
-                    <th>#</th>
                     <th>Titulo</th>
                     <th>Cuerpo</th>
                     <th>Autor</th>
@@ -55,7 +54,6 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>0</td>
                     <td class="d-lg-flex">TV</td>
                     <td>Text</td>
                     <td>Cristian</td>
@@ -69,7 +67,6 @@
 
                 <#list articulos as articulo>
                     <tr>
-                        <td>${articulo.id}</td>
                         <td class="d-lg-flex">${articulo.titulo}</td>
                         <td>${articulo.cuerpo[0..100]}</td>
                         <td>${articulo.autor.nombre}</td>

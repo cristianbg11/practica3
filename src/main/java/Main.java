@@ -60,7 +60,7 @@ public class Main {
             List<String> tagList = Arrays.asList(tags);
             //etiqueta.articulo.id = articulo.getLastArticle();
             //etiqueta.articulo = articulos.get(articulos.size()-1);
-            etiqueta.articulo_id = articulo.getLastArticle();
+            etiqueta.articulo_id = sql.getLastArticle();
             sql.insertEtiqueta(etiqueta, tagList, tagList.size());
             response.redirect("/index");
             return "Articulo Creado";
@@ -72,17 +72,16 @@ public class Main {
         });
 
         get("/edita", (request, response)-> {
-            Usuario user = new Usuario();
-            List<Usuario> users = user.getAllUsers();
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("usuario",users);
+            Session session=request.session(true);
+            Usuario usuario = (Usuario)(session.attribute("usuario"));
+            attributes.put("usuario",usuario);
             return new ModelAndView(attributes, "articuloedit.ftl");
 
         } , new FreeMarkerEngine());
 
         post("/sesion", (request, response)-> {
-            Usuario user = new Usuario();
-            List<Usuario> users = user.getAllUsers();
+            List<Usuario> users = sql.getAllUsers();
             String username = request.queryParams("user");
             String password = request.queryParams("pass");
             Session session=request.session(true);
@@ -99,12 +98,12 @@ public class Main {
 
 
         get("/index", (request, response)-> {
-            Session session=request.session(true);
             Map<String, Object> attributes = new HashMap<>();
+            Session session=request.session(true);
             Usuario usuario = (Usuario)(session.attribute("usuario"));
+            List<Articulo> articulos = sql.getAllArticles();
             attributes.put("usuario",usuario);
-            Articulo articulo = new Articulo();
-            articulo.getAllArticles();
+            attributes.put("articulos",articulos);
             return new ModelAndView(attributes, "index.ftl");
 
         } , new FreeMarkerEngine());
@@ -118,30 +117,32 @@ public class Main {
         });
 
         get("/user", (request, response)-> {
-            Usuario user = new Usuario();
-            List<Usuario> users = user.getAllUsers();
+            List<Usuario> users = sql.getAllUsers();
+            Session session=request.session(true);
+            Usuario usuario = (Usuario)(session.attribute("usuario"));
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("usuario",users);
+            attributes.put("users",users);
+            attributes.put("usuario",usuario);
             return new ModelAndView(attributes, "usuarios.ftl");
 
         } , new FreeMarkerEngine());
 
         get("/articulo", (request, response)-> {
-            Articulo articulo = new Articulo();
-            List<Articulo> articulos = articulo.getAllArticles();
+            List<Articulo> articulos = sql.getAllArticles();
             Map<String, Object> attributes = new HashMap<>();
+            Session session=request.session(true);
+            Usuario usuario = (Usuario)(session.attribute("usuario"));
+            attributes.put("usuario",usuario);
             attributes.put("articulos",articulos);
             return new ModelAndView(attributes, "articulos.ftl");
 
         } , new FreeMarkerEngine());
 
         get("/crear", (request, response)-> {
-
-            Session session=request.session(true);
             Map<String, Object> attributes = new HashMap<>();
+            Session session=request.session(true);
             Usuario usuario = (Usuario)(session.attribute("usuario"));
             attributes.put("usuario",usuario);
-
             return new ModelAndView(attributes, "crear.ftl");
 
         } , new FreeMarkerEngine());
