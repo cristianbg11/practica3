@@ -22,6 +22,15 @@ public class Usuario {
         }
     }
 
+    public List<Usuario> getUser(int id){
+        String sql =
+                "SELECT * FROM usuario " + "WHERE id="+id;
+
+        try(Connection con = sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Usuario.class);
+        }
+    }
+
     public int getId() {
         return id;
     }

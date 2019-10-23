@@ -9,18 +9,30 @@ public class Articulo {
     String titulo;
     String cuerpo;
     Usuario autor;
+    int usuario_id;
     Date fecha;
     List<Comentario> listaComentario;
     List<Etiqueta> listaEtiqueta;
 
     Sql2o sql2o = new Sql2o("jdbc:h2:~/practica3", "sa", "");
     public List<Articulo> getAllArticles(){
+        Usuario usuario = new Usuario();
+        try (Connection con = sql2o.open()) {
+            List<Articulo> articulos = con.createQuery("Select * from Articulo").executeAndFetch(Articulo.class);
+            for(Articulo articulo: articulos)
+            {
+                articulo.setAutor(usuario.getUser(articulo.usuario_id).get(0));
+            }
+            return articulos;
+        }
+    }
+    public Articulo getArticulo(int id){
         String sql =
-                "SELECT id, titulo, cuerpo, usuario_id, fecha " +
-                        "FROM articulo";
+                "SELECT usuario_id" +
+                        "FROM articulo WHERE id="+id;
 
         try(Connection con = sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Articulo.class);
+            return con.createQuery(sql).executeScalar(Articulo.class);
         }
     }
 
@@ -31,6 +43,16 @@ public class Articulo {
 
         try(Connection con = sql2o.open()) {
             return con.createQuery(sql).executeScalar(Integer.class);
+        }
+    }
+
+    public List<Usuario> getAllUsers(){
+        String sql =
+                "SELECT id, username, password, administrador, autor, nombre " +
+                        "FROM usuario";
+
+        try(Connection con = sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Usuario.class);
         }
     }
 

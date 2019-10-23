@@ -61,7 +61,7 @@
         <div class="row articles">
             <div class="col-sm-6 col-md-4 item"><a href="#"></a>
                 <h3 class="name">Article Title</h3>
-                <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a href="#" class="action" id="viewopen"><i class="fa fa-arrow-circle-right"></i></a></div>
+                <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a href="#" class="action"><i class="fa fa-arrow-circle-right"></i></a></div>
             <div
                     class="col-sm-6 col-md-4 item"><a href="#"></a>
                 <h3 class="name">Article Title</h3>
@@ -72,13 +72,6 @@
                 <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a href="#" class="action"><i class="fa fa-arrow-circle-right"></i></a></div>
         </div>
     </div>
-</div>
-<div class="pop">
-    <span>X</span>
-    <h1>jQuery Pop Up</h1>
-    <p>This is a random pop up, hopefully its not annoying.</p>
-    <div class="form-group"><label>Comentario</label><textarea class="form-control"></textarea></div>
-    <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="margin: 0 auto;width: 82px;height: 38px;">Enviar</button></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

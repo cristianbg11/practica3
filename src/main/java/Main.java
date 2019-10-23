@@ -26,7 +26,7 @@ public class Main {
 
     //public static ArrayList usuarios=new ArrayList<Usuario>();
     public static void main(String[] args) {
-        Usuario user = new Usuario();
+
         port(8080);
         staticFiles.location("/publico");
         Sql sql = new Sql();
@@ -72,6 +72,7 @@ public class Main {
         });
 
         get("/edita", (request, response)-> {
+            Usuario user = new Usuario();
             List<Usuario> users = user.getAllUsers();
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("usuario",users);
@@ -80,6 +81,7 @@ public class Main {
         } , new FreeMarkerEngine());
 
         post("/sesion", (request, response)-> {
+            Usuario user = new Usuario();
             List<Usuario> users = user.getAllUsers();
             String username = request.queryParams("user");
             String password = request.queryParams("pass");
@@ -101,6 +103,8 @@ public class Main {
             Map<String, Object> attributes = new HashMap<>();
             Usuario usuario = (Usuario)(session.attribute("usuario"));
             attributes.put("usuario",usuario);
+            Articulo articulo = new Articulo();
+            articulo.getAllArticles();
             return new ModelAndView(attributes, "index.ftl");
 
         } , new FreeMarkerEngine());
@@ -114,6 +118,7 @@ public class Main {
         });
 
         get("/user", (request, response)-> {
+            Usuario user = new Usuario();
             List<Usuario> users = user.getAllUsers();
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("usuario",users);
@@ -122,9 +127,10 @@ public class Main {
         } , new FreeMarkerEngine());
 
         get("/articulo", (request, response)-> {
-            List<Usuario> users = user.getAllUsers();
+            Articulo articulo = new Articulo();
+            List<Articulo> articulos = articulo.getAllArticles();
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("usuario",users);
+            attributes.put("articulos",articulos);
             return new ModelAndView(attributes, "articulos.ftl");
 
         } , new FreeMarkerEngine());
