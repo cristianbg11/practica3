@@ -101,7 +101,7 @@ public class Main {
             Map<String, Object> attributes = new HashMap<>();
             Session session=request.session(true);
             Usuario usuario = (Usuario)(session.attribute("usuario"));
-            List<Articulo> articulos = sql.getAllArticles();
+            List<Articulo> articulos = sql.getLastArticles();
             attributes.put("usuario",usuario);
             attributes.put("articulos",articulos);
             return new ModelAndView(attributes, "index.ftl");
@@ -138,6 +138,19 @@ public class Main {
 
         } , new FreeMarkerEngine());
 
+        get("/post", (request, response)-> {
+
+            int id = Integer.parseInt(request.queryParams("id_post"))-1;
+            List<Articulo> articulos = sql.getArticle(id);
+            Map<String, Object> attributes = new HashMap<>();
+            Session session=request.session(true);
+            Usuario usuario = (Usuario)(session.attribute("usuario"));
+            attributes.put("usuario",usuario);
+            attributes.put("post",articulos.get(0));
+            return new ModelAndView(attributes, "post.ftl");
+
+        } , new FreeMarkerEngine());
+
         get("/crear", (request, response)-> {
             Map<String, Object> attributes = new HashMap<>();
             Session session=request.session(true);
@@ -146,6 +159,18 @@ public class Main {
             return new ModelAndView(attributes, "crear.ftl");
 
         } , new FreeMarkerEngine());
+
+        post("/comentar", (request, response) -> {
+            Session session=request.session(true);
+            Usuario usuario = (Usuario)(session.attribute("usuario"));
+            Comentario comentario = new Comentario();
+            comentario.comentario = request.queryParams("comentario");
+            comentario.autor = usuario;
+            comentario.articulo_id = Integer.parseInt(request.queryParams("articulo_id"));
+            sql.insertComentario(comentario);
+            response.redirect("/post?id_post="+(comentario.articulo_id));
+            return "Comentario Creado";
+        });
 
     }
 

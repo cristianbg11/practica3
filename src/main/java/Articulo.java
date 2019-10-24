@@ -1,6 +1,7 @@
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,11 @@ public class Articulo {
     List<Comentario> listaComentario;
     List<Etiqueta> listaEtiqueta;
 
+    public Articulo()
+    {
+        listaComentario = new ArrayList<>();
+        listaEtiqueta = new ArrayList<>();
+    }
     public long getId() {
         return id;
     }

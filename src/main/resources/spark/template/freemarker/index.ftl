@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="assets/css/Article-List.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/smoothproducts.css">
-    <link rel="stylesheet" href="css/view.css">
+    <link rel="stylesheet" href="assets/css/Footer-Clean.css">
 </head>
 <body>
 
@@ -55,34 +55,26 @@
 <div class="article-list">
     <div class="container">
         <div class="intro">
-            <h2 class="text-center">Latest Articles</h2>
-            <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+            <h2 class="text-center">Ultimos articulos</h2>
         </div>
         <div class="row articles">
-            <div class="col-sm-6 col-md-4 item"><a href="#"></a>
-                <h3 class="name">Article Title</h3>
-                <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a class="action" href="#"><i class="fa fa-arrow-circle-right"></i></a></div>
-            <div
-                    class="col-sm-6 col-md-4 item"><a href="#"></a>
-                <h3 class="name">Article Title</h3>
-                <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a class="action" href="#"><i class="fa fa-arrow-circle-right"></i></a></div>
-            <div
-                    class="col-sm-6 col-md-4 item"><a href="#"></a>
-                <h3 class="name">Article Title</h3>
-                <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a class="action" href="#"><i class="fa fa-arrow-circle-right"></i></a></div>
-            <div
-                    class="col-sm-6 col-md-4 item"><a href="#"></a>
-                <h3 class="name">Article Title</h3>
-                <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id.</p><a class="action" href="#"><i class="fa fa-arrow-circle-right"></i></a></div>
+            <#if articulos?has_content>
+                <#list articulos as articulo>
+                        <div class="col-sm-6 col-md-4 item"><a href="#"></a>
+                            <h3 class="name">${articulo.titulo}</h3>
+                            <p class="description">${articulo.cuerpo[0..70]}</p><a class="action" href="/post?id_post=${articulo.id}"><i class="fa fa-arrow-circle-right"></i></a></div>
+                </#list>
+            </#if>
         </div>
     </div>
 </div>
-
+<div class="footer-clean">
+    <footer></footer>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
 <script src="assets/js/smoothproducts.min.js"></script>
 <script src="assets/js/theme.js"></script>
-<script src="js/view.js"></script>
 </body>
 </html>

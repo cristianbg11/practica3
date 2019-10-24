@@ -8,17 +8,6 @@ public class Etiqueta {
     String etiqueta;
     int articulo_id;
 
-    Sql2o sql2o = new Sql2o("jdbc:h2:~/practica3", "sa", "");
-    public List<Etiqueta> getAllEtiquetas(){
-        String sql =
-                "SELECT id, etiqueta, articulo_id " +
-                        "FROM etiqueta";
-
-        try(Connection con = sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Etiqueta.class);
-        }
-    }
-
     public long getId() {
         return id;
     }

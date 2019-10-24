@@ -3,6 +3,8 @@ public class Comentario {
     String comentario;
     Usuario autor;
     Articulo articulo;
+    int usuario_id;
+    int articulo_id;
 
     public long getId() {
         return id;
@@ -34,5 +36,21 @@ public class Comentario {
 
     public void setArticulo(Articulo articulo) {
         this.articulo = articulo;
+    }
+
+    public int getUsuario_id() {
+        return usuario_id;
+    }
+
+    public void setUsuario_id(int usuario_id) {
+        this.usuario_id = usuario_id;
+    }
+
+    public int getArticulo_id() {
+        return articulo_id;
+    }
+
+    public void setArticulo_id(int articulo_id) {
+        this.articulo_id = articulo_id;
     }
 }
