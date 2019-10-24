@@ -66,16 +66,44 @@ public class Main {
             return "Articulo Creado";
         });
 
+        get("/delete", (request, response)-> {
+            int id_articulo = Integer.parseInt(request.queryParams("id_post"));
+            sql.deleteArticulo(id_articulo);
+            response.redirect("/articulo");
+            return "Articulo Borrado";
+        });
+
+        post("/update", (request, response)-> {
+            Articulo articulo = new Articulo();
+            Etiqueta etiqueta = new Etiqueta();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            articulo.titulo = request.queryParams("titulo");
+            articulo.cuerpo = request.queryParams("cuerpo");
+            articulo.fecha = format.parse(request.queryParams("fecha"));
+            int id_articulo = Integer.parseInt(request.queryParams("id_post"));
+            sql.editArticulo(id_articulo, articulo);
+            sql.deleteEtiqueta(id_articulo);
+            String[] tags = request.queryParams("etiqueta").split(",");
+            List<String> tagList = Arrays.asList(tags);
+            etiqueta.articulo_id = id_articulo;
+            sql.insertEtiqueta(etiqueta, tagList, tagList.size());
+            response.redirect("/post?id_post="+id_articulo);
+            return "Articulo Actualizado";
+        });
+
         get("/", (request, response)-> {
             //response.redirect("/login.html");
             return renderContent("publico/login.html");
         });
 
         get("/edita", (request, response)-> {
+            int id = Integer.parseInt(request.queryParams("id_post"))-1;
+            List<Articulo> articulos = sql.getArticle(id);
             Map<String, Object> attributes = new HashMap<>();
             Session session=request.session(true);
             Usuario usuario = (Usuario)(session.attribute("usuario"));
             attributes.put("usuario",usuario);
+            attributes.put("post",articulos.get(0));
             return new ModelAndView(attributes, "articuloedit.ftl");
 
         } , new FreeMarkerEngine());
@@ -139,7 +167,6 @@ public class Main {
         } , new FreeMarkerEngine());
 
         get("/post", (request, response)-> {
-
             int id = Integer.parseInt(request.queryParams("id_post"))-1;
             List<Articulo> articulos = sql.getArticle(id);
             Map<String, Object> attributes = new HashMap<>();

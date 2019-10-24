@@ -1,6 +1,7 @@
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.Date;
 import java.util.List;
 
 public class Sql {
@@ -64,8 +65,31 @@ public class Sql {
                 con.commit();
             }
         }
+    }
+    public void deleteEtiqueta (int articulo_id) throws ClassNotFoundException {
+        Class.forName("org.h2.Driver");
+        try (Connection con = sql2o.beginTransaction()) {
+            con.createQuery("delete from etiqueta where articulo_id="+articulo_id).executeUpdate();
+            // Remember to call commit() when a transaction is opened,
+            // default is to roll back.
+            con.commit();
+        }
 
     }
+
+    public void deleteArticulo (int articulo_id) throws ClassNotFoundException {
+        Class.forName("org.h2.Driver");
+        try (Connection con = sql2o.beginTransaction()) {
+            con.createQuery("delete from comentario where articulo_id="+articulo_id).executeUpdate();
+            con.createQuery("delete from etiqueta where articulo_id="+articulo_id).executeUpdate();
+            con.createQuery("delete from articulo where id="+articulo_id).executeUpdate();
+            // Remember to call commit() when a transaction is opened,
+            // default is to roll back.
+            con.commit();
+        }
+
+    }
+
     public void insertComentario (Comentario comentario) throws ClassNotFoundException {
         Class.forName("org.h2.Driver");
         String insertQuery =
@@ -160,25 +184,24 @@ public class Sql {
         }
     }
 
+    public void editArticulo(int id, Articulo articulo){
+        String updateSql = "update articulo set titulo = :titulo, cuerpo = :cuerpo, fecha = :fecha where id ="+id;
+
+        try (Connection con = sql2o.open()) {
+            con.createQuery(updateSql)
+                    .addParameter("titulo", articulo.getTitulo())
+                    .addParameter("cuerpo", articulo.getCuerpo())
+                    .addParameter("fecha", articulo.getFecha())
+                    .executeUpdate();
+        }
+    }
+
     public List<Etiqueta> getAllEtiquetas(int id){
         try (Connection con = sql2o.open()) {
             List<Etiqueta> etiquetas = con.createQuery("Select * from etiqueta where articulo_id="+id).executeAndFetch(Etiqueta.class);
             return etiquetas;
         }
     }
-    /*
-    public List<Comentario> getComment(){
-        Usuario usuario = new Usuario();
-        try (Connection con = sql2o.open()) {
-            List<Comentario> comentarios = con.createQuery("Select * from Comentario").executeAndFetch(Comentario.class);
-            for(Comentario comentario: comentarios)
-            {
-                comentario.setAutor(getUser(comentario.usuario_id).get(0));
-            }
-            return comentarios;
-        }
-    }
-    */
 
     public List<Comentario> getAllComments(int id){
         try (Connection con = sql2o.open()) {

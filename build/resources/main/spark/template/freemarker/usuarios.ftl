@@ -47,14 +47,14 @@
                     <div class="col-md-5 col-lg-4">
                         <div class="clean-pricing-item">
                             <div class="heading">
-                                <h3>${usuario.username}</h3>
+                                <h3>${user.username}</h3>
                             </div>
                             <div class="features">
                                 <h4><span class="feature">Nombre:&nbsp;</span><span>${user.nombre}</span></h4>
                                 <h4><span class="feature">Administrador:&nbsp;</span><span>${user.administrador?then('Si', 'No')}</span></h4>
                                 <h4><span class="feature">Autor:&nbsp;</span><span>${user.autor?then('Si', 'No')}</span></h4>
                             </div>
-                            <div class="price"></div><button class="btn btn-outline-primary btn-block" type="button">Editar</button><button class="btn btn-outline-primary btn-block" type="button">Eliminar</button></div>
+                        </div>
                     </div>
                 </#list>
             </div>
