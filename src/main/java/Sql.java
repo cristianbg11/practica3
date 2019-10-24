@@ -25,7 +25,26 @@ public class Sql {
             // default is to roll back.
             con.commit();
         }
+    }
 
+    public void insertAdmin () throws ClassNotFoundException {
+        Class.forName("org.h2.Driver");
+        String insertQuery =
+                "INSERT INTO USUARIO (username, password, administrador, autor, nombre) " +
+                        "VALUES (:username, :password, :administrador, :autor, :nombre)";
+
+        try (Connection con = sql2o.beginTransaction()) {
+            con.createQuery(insertQuery)
+                    .addParameter("username", "admin")
+                    .addParameter("password", "1234")
+                    .addParameter("administrador", true)
+                    .addParameter("autor", true)
+                    .addParameter("nombre", "cristian")
+                    .executeUpdate();
+            // Remember to call commit() when a transaction is opened,
+            // default is to roll back.
+            con.commit();
+        }
     }
 
     public void insertArticulo (Articulo articulo) throws ClassNotFoundException {
@@ -112,6 +131,15 @@ public class Sql {
     public List<Usuario> getUser(int id){
         String sql =
                 "SELECT * FROM usuario " + "WHERE id="+id;
+
+        try(Connection con = sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(Usuario.class);
+        }
+    }
+
+    public List<Usuario> getadmin(){
+        String sql =
+                "SELECT * FROM usuario WHERE username = 'admin'";
 
         try(Connection con = sql2o.open()) {
             return con.createQuery(sql).executeAndFetch(Usuario.class);

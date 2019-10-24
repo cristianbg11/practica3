@@ -25,11 +25,15 @@ import static spark.Spark.*;
 public class Main {
 
     //public static ArrayList usuarios=new ArrayList<Usuario>();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
 
         port(8080);
         staticFiles.location("/publico");
         Sql sql = new Sql();
+        List<Usuario> admin = sql.getadmin();
+        if (!admin.get(0).username.equals("admin")){
+            sql.insertAdmin();
+        }
         post("/insertar", (request, response) -> {
             Usuario usuario = new Usuario();
             usuario.username = request.queryParams("username");
