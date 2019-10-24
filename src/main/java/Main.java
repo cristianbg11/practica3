@@ -24,7 +24,6 @@ import static spark.Spark.*;
 
 public class Main {
 
-    //public static ArrayList usuarios=new ArrayList<Usuario>();
     public static void main(String[] args) throws ClassNotFoundException {
 
         port(8080);
@@ -101,11 +100,16 @@ public class Main {
         });
 
         get("/edita", (request, response)-> {
-            int id = Integer.parseInt(request.queryParams("id_post"))-1;
-            List<Articulo> articulos = sql.getArticle(id);
             Map<String, Object> attributes = new HashMap<>();
             Session session=request.session(true);
             Usuario usuario = (Usuario)(session.attribute("usuario"));
+            if(usuario==null){
+                response.redirect("/");
+            } else if (usuario.administrador==false){
+                response.redirect("/index");
+            }
+            int id = Integer.parseInt(request.queryParams("id_post"))-1;
+            List<Articulo> articulos = sql.getArticle(id);
             attributes.put("usuario",usuario);
             attributes.put("post",articulos.get(0));
             return new ModelAndView(attributes, "articuloedit.ftl");
@@ -133,6 +137,11 @@ public class Main {
             Map<String, Object> attributes = new HashMap<>();
             Session session=request.session(true);
             Usuario usuario = (Usuario)(session.attribute("usuario"));
+            if(usuario==null){
+                response.redirect("/");
+            } else if (usuario.administrador==false){
+                response.redirect("/index");
+            }
             List<Articulo> articulos = sql.getLastArticles();
             attributes.put("usuario",usuario);
             attributes.put("articulos",articulos);
@@ -149,10 +158,15 @@ public class Main {
         });
 
         get("/user", (request, response)-> {
-            List<Usuario> users = sql.getAllUsers();
             Session session=request.session(true);
             Usuario usuario = (Usuario)(session.attribute("usuario"));
+            if(usuario==null){
+                response.redirect("/");
+            } else if (usuario.administrador==false){
+                response.redirect("/index");
+            }
             Map<String, Object> attributes = new HashMap<>();
+            List<Usuario> users = sql.getAllUsers();
             attributes.put("users",users);
             attributes.put("usuario",usuario);
             return new ModelAndView(attributes, "usuarios.ftl");
@@ -160,10 +174,15 @@ public class Main {
         } , new FreeMarkerEngine());
 
         get("/articulo", (request, response)-> {
-            List<Articulo> articulos = sql.getAllArticles();
             Map<String, Object> attributes = new HashMap<>();
             Session session=request.session(true);
             Usuario usuario = (Usuario)(session.attribute("usuario"));
+            if(usuario==null){
+                response.redirect("/");
+            } else if (usuario.administrador==false){
+                response.redirect("/index");
+            }
+            List<Articulo> articulos = sql.getAllArticles();
             attributes.put("usuario",usuario);
             attributes.put("articulos",articulos);
             return new ModelAndView(attributes, "articulos.ftl");
@@ -171,11 +190,16 @@ public class Main {
         } , new FreeMarkerEngine());
 
         get("/post", (request, response)-> {
+            Session session=request.session(true);
+            Usuario usuario = (Usuario)(session.attribute("usuario"));
+            if(usuario==null){
+                response.redirect("/");
+            } else if (usuario.administrador==false){
+                response.redirect("/index");
+            }
             int id = Integer.parseInt(request.queryParams("id_post"))-1;
             List<Articulo> articulos = sql.getArticle(id);
             Map<String, Object> attributes = new HashMap<>();
-            Session session=request.session(true);
-            Usuario usuario = (Usuario)(session.attribute("usuario"));
             attributes.put("usuario",usuario);
             attributes.put("post",articulos.get(0));
             return new ModelAndView(attributes, "post.ftl");
@@ -186,6 +210,11 @@ public class Main {
             Map<String, Object> attributes = new HashMap<>();
             Session session=request.session(true);
             Usuario usuario = (Usuario)(session.attribute("usuario"));
+            if(usuario==null){
+                response.redirect("/");
+            } else if (usuario.administrador==false){
+                response.redirect("/index");
+            }
             attributes.put("usuario",usuario);
             return new ModelAndView(attributes, "crear.ftl");
 

@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Sql {
-    //Class.forName("org.h2.Driver");
     Sql2o sql2o = new Sql2o("jdbc:h2:~/practica3", "sa", "");
     public void insertUser (Usuario usuario) throws ClassNotFoundException {
         Class.forName("org.h2.Driver");
