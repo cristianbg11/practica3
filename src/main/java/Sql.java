@@ -6,24 +6,6 @@ import java.util.List;
 
 public class Sql {
     Sql2o sql2o = new Sql2o("jdbc:h2:~/practica3", "sa", "");
-    public void insertUser (Usuario usuario) throws ClassNotFoundException {
-        Class.forName("org.h2.Driver");
-        String insertQuery =
-                "INSERT INTO USUARIO (username, password, administrador, autor, nombre) " +
-                        "VALUES (:username, :password, :administrador, :autor, :nombre)";
-
-        try (Connection con = sql2o.beginTransaction()) {
-            con.createQuery(insertQuery)
-                    .addParameter("username", usuario.getUsername())
-                    .addParameter("password", usuario.getPassword())
-                    .addParameter("administrador", usuario.isAdministrador())
-                    .addParameter("autor", usuario.isAutor())
-                    .addParameter("nombre", usuario.getNombre())
-                    .executeUpdate();
-            con.commit();
-        }
-    }
-
     public void insertAdmin () throws ClassNotFoundException {
         Class.forName("org.h2.Driver");
         String insertQuery =
@@ -37,6 +19,24 @@ public class Sql {
                     .addParameter("administrador", true)
                     .addParameter("autor", true)
                     .addParameter("nombre", "cristian")
+                    .executeUpdate();
+            con.commit();
+        }
+    }
+
+    public void insertUser (Usuario usuario) throws ClassNotFoundException {
+        Class.forName("org.h2.Driver");
+        String insertQuery =
+                "INSERT INTO USUARIO (username, password, administrador, autor, nombre) " +
+                        "VALUES (:username, :password, :administrador, :autor, :nombre)";
+
+        try (Connection con = sql2o.beginTransaction()) {
+            con.createQuery(insertQuery)
+                    .addParameter("username", usuario.getUsername())
+                    .addParameter("password", usuario.getPassword())
+                    .addParameter("administrador", usuario.isAdministrador())
+                    .addParameter("autor", usuario.isAutor())
+                    .addParameter("nombre", usuario.getNombre())
                     .executeUpdate();
             con.commit();
         }
