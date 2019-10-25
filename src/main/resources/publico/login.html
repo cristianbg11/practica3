@@ -24,6 +24,9 @@
             <h1>Sign in</h1>
             <input type="text" placeholder="Username" name="user" />
             <input type="password" placeholder="Password" name="pass" />
+            <label for="recordatorio" style="display: block; padding-left: 15px; text-indent: -15px;">
+                <input type="checkbox" name="recordatorio" id="recordatorio" value="si"
+                       style="width: 13px; height: 13px; padding: 0; margin:0; vertical-align: bottom; position: relative; top: -1px; *overflow: hidden;">Recordar usuario?</label>
             <button>Iniciar</button>
         </form>
     </div>
@@ -32,7 +35,7 @@
             <div class="overlay-panel overlay-left">
                 <h1>Bienvenido!</h1>
                 <p>Para seguir conectado, inicie sesion con sus datos personales</p>
-                <button class="ghost" id="signIn">Sign In</button>
+                <button class="ghost" id="signIn" >Sign In</button>
             </div>
             <div class="overlay-panel overlay-right">
                 <h1>Hola, Usuario!</h1>

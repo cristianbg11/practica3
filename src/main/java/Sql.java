@@ -20,8 +20,6 @@ public class Sql {
                     .addParameter("autor", usuario.isAutor())
                     .addParameter("nombre", usuario.getNombre())
                     .executeUpdate();
-            // Remember to call commit() when a transaction is opened,
-            // default is to roll back.
             con.commit();
         }
     }
@@ -40,8 +38,6 @@ public class Sql {
                     .addParameter("autor", true)
                     .addParameter("nombre", "cristian")
                     .executeUpdate();
-            // Remember to call commit() when a transaction is opened,
-            // default is to roll back.
             con.commit();
         }
     }
@@ -59,8 +55,6 @@ public class Sql {
                     .addParameter("usuario_id", articulo.getAutor().id)
                     .addParameter("fecha", articulo.getFecha())
                     .executeUpdate();
-            // Remember to call commit() when a transaction is opened,
-            // default is to roll back.
             con.commit();
         }
 
@@ -78,8 +72,6 @@ public class Sql {
                         .addParameter("etiqueta", tag.get(i))
                         .addParameter("articulo_id", etiqueta.getArticulo_id())
                         .executeUpdate();
-                // Remember to call commit() when a transaction is opened,
-                // default is to roll back.
                 con.commit();
             }
         }
@@ -88,8 +80,6 @@ public class Sql {
         Class.forName("org.h2.Driver");
         try (Connection con = sql2o.beginTransaction()) {
             con.createQuery("delete from etiqueta where articulo_id="+articulo_id).executeUpdate();
-            // Remember to call commit() when a transaction is opened,
-            // default is to roll back.
             con.commit();
         }
 
@@ -101,8 +91,6 @@ public class Sql {
             con.createQuery("delete from comentario where articulo_id="+articulo_id).executeUpdate();
             con.createQuery("delete from etiqueta where articulo_id="+articulo_id).executeUpdate();
             con.createQuery("delete from articulo where id="+articulo_id).executeUpdate();
-            // Remember to call commit() when a transaction is opened,
-            // default is to roll back.
             con.commit();
         }
 
@@ -120,8 +108,6 @@ public class Sql {
                     .addParameter("usuario_id", comentario.getAutor().id)
                     .addParameter("articulo_id", comentario.getArticulo_id())
                     .executeUpdate();
-            // Remember to call commit() when a transaction is opened,
-            // default is to roll back.
             con.commit();
         }
 

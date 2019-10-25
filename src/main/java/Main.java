@@ -46,7 +46,6 @@ public class Main {
         });
 
         post("/crear-articulo", (request, response)-> {
-            //int id = Integer.parseInt(request.queryParams("iduser"));
             Session session=request.session(true);
             Usuario usuario = (Usuario)(session.attribute("usuario"));
             Articulo articulo = new Articulo();
@@ -96,6 +95,13 @@ public class Main {
 
         get("/", (request, response)-> {
             //response.redirect("/login.html");
+            if (request.cookie("CookieUsuario") != null){
+                String id = request.cookie("CookieUsuario");
+                List<Usuario> usuario = sql.getUser(Integer.parseInt(id));
+                Session session=request.session(true);
+                session.attribute("usuario", usuario.get(0));
+                response.redirect("/index");
+            }
             return renderContent("publico/login.html");
         });
 
@@ -125,6 +131,9 @@ public class Main {
             for(Usuario usuario : users){
                 if (usuario.username.equals(username) && usuario.password.equals(password)){
                     session.attribute("usuario", usuario);
+                    if (request.queryParams("recordatorio") !=null && request.queryParams("recordatorio").equals("si") ){
+                        response.cookie("/", "CookieUsuario", String.valueOf(usuario.id), 604800, false);
+                    }
                     response.redirect("/index");
                 }
             }
@@ -153,6 +162,7 @@ public class Main {
             //creando cookie en para un minuto
             Session session=request.session(true);
             session.invalidate();
+            response.removeCookie("CookieUsuario");
             response.redirect("/");
             return "Sesion finalizada";
         });
