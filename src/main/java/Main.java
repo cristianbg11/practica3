@@ -96,8 +96,8 @@ public class Main {
         get("/", (request, response)-> {
             //response.redirect("/login.html");
             if (request.cookie("CookieUsuario") != null){
-                String id = request.cookie("CookieUsuario");
-                List<Usuario> usuario = sql.getUser(Integer.parseInt(id));
+                //String id = request.cookie("CookieUsuario");
+                List<Usuario> usuario = sql.getUser(1);
                 Session session=request.session(true);
                 session.attribute("usuario", usuario.get(0));
                 response.redirect("/index");
@@ -132,7 +132,14 @@ public class Main {
                 if (usuario.username.equals(username) && usuario.password.equals(password)){
                     session.attribute("usuario", usuario);
                     if (request.queryParams("recordatorio") !=null && request.queryParams("recordatorio").equals("si") ){
-                        response.cookie("/", "CookieUsuario", String.valueOf(usuario.id), 604800, false);
+                        Map<String, String> cookies=request.cookies();
+                        //response.cookie("/", "CookieUsuario", String.valueOf(usuario.id), 604800, true);
+                        for (String key : cookies.keySet()) {
+                            if (key != null) {
+                                response.removeCookie(key);
+                                response.cookie("/", "CookieUsuario", cookies.get(key), 604800, false);
+                            }
+                        }
                     }
                     response.redirect("/index");
                 }
